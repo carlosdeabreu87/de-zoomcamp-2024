@@ -7,3 +7,14 @@ docker run -it \
     postgres:13
 
 pgcli -h localhost -p 5432 -u root -d ny_taxi
+
+
+
+Q3: select count(*) from green_taxi_data where date(lpep_pickup_datetime)='2019-09-18' and date(lpep_dropoff_datetime)='2019-09-18';
+
+Q4: select date(lpep_pickup_datetime), max(trip_distance) from green_taxi_data group by date(lpep_pickup_datetime) order by 2 desc;
+
+Q5: select b."Borough", sum(a.total_amount) from green_taxi_data a inner join taxi_zone_lookup b on a."PULocationID" = b."LocationID" group by b."Borough" having sum(a.total_amount) > 50000 order by 2 desc;
+
+Q6: select b."Zone", max(a.tip_amount) from green_taxi_data a inner join taxi_zone_lookup b on a."DOLocationID" = b."LocationID" where b."Zone" in ('Central Park', 'Jamaica', 'JFK Airport', 'Long Island City/Queens Plaza') group by b."Zone" order by 2 desc;
+
